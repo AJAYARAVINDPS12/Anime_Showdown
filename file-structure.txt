@@ -1,0 +1,55 @@
+Anime Showdown - Codebase File Structure
+=========================================
+
+.
+├── App.js                                # Application root, screens state router
+├── app.json                              # Expo configurations
+├── index.js                              # Metro web entry hookup
+├── package.json                          # Dependencies & build scripts
+├── file-structure.txt                    # Project directory structure registry
+├── CLAUDE.md                             # Project instructions
+├── AGENTS.md                             # Workspace developer rules
+├── LICENSE                               # License details
+│
+├── assets/                               # Game static resources
+│   ├── auth-background/                  # High-quality lobby sector keyart
+│   │   ├── anime-debate.jpg              # SEC-04: Anime Debate background art
+│   │   ├── anime-drafter.png             # SEC-03: Anime Drafter background art
+│   │   ├── anime-showdown.jpg            # SEC-02: Anime Showdown background art
+│   │   ├── anime-tierlist.jpg            # SEC-05: Anime Tier List background art
+│   │   ├── pokemon-drafter.jpg           # SEC-06: Pokémon Drafter background art
+│   │   └── pokemon-showdown.jpg          # SEC-01: Pokémon Showdown background art
+│   ├── android-icon-background.png       # Android adaptive icon background
+│   ├── android-icon-foreground.png       # Android adaptive icon foreground
+│   ├── android-icon-monochrome.png       # Android monochrome app icon
+│   ├── favicon.png                       # Browser page favicon
+│   ├── icon.png                          # Expo main app launcher icon
+│   ├── splash-bg.jpg                     # Main splash screen background image
+│   └── splash-icon.png                   # Splash loading cover logo
+│
+└── src/                                  # Application Source Directory
+    └── screens/                          # Front-end View Modules
+        ├── auth/                         # Credentials Access Forms
+        │   ├── login.css                 # Login panel styles
+        │   ├── login.jsx                 # Login credentials checks and state
+        │   ├── signup.css                # Registration styles
+        │   └── signup.jsx                # New combatant signature creation
+        │
+        ├── screens/                      # Main Gameplay Lobby & Modules
+        │   ├── home.css                  # Lobby layout and sector quick list styles
+        │   ├── home.jsx                  # Main lobby navigation and sector details
+        │   ├── navbar.css                # Header navigation banner styles
+        │   ├── navbar.jsx                # Header links, profile link and logouts
+        │   ├── user-profile.css          # Profile metrics card styles
+        │   ├── user-profile.jsx          # Profile dossier, combat statistics
+        │   └── pokemon-showdown/         # Pokémon Showdown sector integration module
+        │       ├── pok-show-home.jsx     # Pokémon Showdown lobby integration view
+        │       └── pokemon-data-sim/     # Simulated battle stats backend directories
+        │           ├── data/             # Static database rules directories
+        │           └── sim/              # Battle simulation script directories
+        │
+        └── splash-screen/                # Landing / Entry Gate View Modules
+            ├── auth-choose.css           # Landing webpage styles
+            ├── auth-choose.jsx           # Landing professional game entry page
+            ├── splash-screen.css         # Connecting screen styles
+            └── splash-screen.jsx         # Connection loading bar, radar interface

@@ -1,0 +1,651 @@
+@import '../splash-screen/splash-screen.css';
+
+/* Home Lobby Component Layout */
+.home-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-dark);
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  height: calc(100vh - 80px);
+  width: 100%;
+  padding: 25px;
+  box-sizing: border-box;
+  gap: 25px;
+  z-index: 5;
+}
+
+@media (max-width: 900px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow-y: auto;
+  }
+}
+
+.dashboard-panel-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.panel-header-cyber {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.panel-title-cyber {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.panel-title-accent {
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+}
+
+
+
+/* Sector Selector Panel (Showcase + Roster) */
+.lobby-sector-viewer {
+  display: flex;
+  gap: 25px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+  .lobby-sector-viewer {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .sector-showcase-panel {
+    min-height: 400px;
+  }
+  .sector-navigation-list {
+    width: 100% !important;
+  }
+}
+
+/* Selected Sector Large Showcase */
+.sector-showcase-panel {
+  flex: 1.4;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px;
+  box-sizing: border-box;
+  background-color: var(--bg-dark);
+}
+
+.showcase-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out, transform 8s ease-out;
+  z-index: 0;
+}
+
+.sector-showcase-panel:hover .showcase-bg-image {
+  transform: scale(1.05);
+}
+
+.showcase-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(6, 6, 12, 0.98) 0%, rgba(6, 6, 12, 0.7) 40%, rgba(6, 6, 12, 0.2) 100%),
+              radial-gradient(circle at 0% 100%, rgba(0, 243, 255, 0.15) 0%, transparent 60%);
+  z-index: 1;
+}
+
+.showcase-content-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  width: 100%;
+  text-align: left;
+}
+
+.showcase-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.showcase-status-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.showcase-status-badge.live, .showcase-status-badge.active, .showcase-status-badge.online {
+  background: rgba(57, 255, 20, 0.1);
+  color: var(--neon-green);
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  text-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
+}
+
+.showcase-status-badge.voting-live {
+  background: rgba(0, 243, 255, 0.1);
+  color: var(--neon-blue);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+}
+
+.showcase-status-badge.registering {
+  background: rgba(255, 0, 123, 0.1);
+  color: var(--neon-pink);
+  border: 1px solid rgba(255, 0, 123, 0.3);
+  text-shadow: 0 0 5px rgba(255, 0, 123, 0.3);
+}
+
+.showcase-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.1;
+  background: linear-gradient(to right, #ffffff, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.8));
+}
+
+.showcase-code {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--neon-blue);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: -5px;
+}
+
+.showcase-desc {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #a0aec0;
+  max-width: 650px;
+  margin: 0 0 10px 0;
+}
+
+.showcase-stats-grid {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  padding: 15px 0;
+  width: 100%;
+}
+
+.showcase-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.showcase-stat-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: #718096;
+  letter-spacing: 1px;
+}
+
+.showcase-stat-val {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.showcase-action-row {
+  width: 100%;
+}
+
+.btn-launch-showcase {
+  position: relative;
+  border: none;
+  color: #06060c;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  padding: 18px 45px;
+  cursor: pointer;
+  clip-path: polygon(0 0, 85% 0, 100% 30%, 100% 100%, 15% 100%, 0 70%);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+  text-transform: uppercase;
+}
+
+.btn-launch-showcase.blue-accent {
+  background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+}
+
+.btn-launch-showcase.pink-accent {
+  background: linear-gradient(135deg, var(--neon-pink) 0%, var(--neon-purple) 100%);
+  box-shadow: 0 0 25px rgba(255, 0, 123, 0.4);
+  color: #ffffff;
+}
+
+.btn-launch-showcase.purple-accent {
+  background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-pink) 100%);
+  box-shadow: 0 0 25px rgba(157, 0, 255, 0.4);
+  color: #ffffff;
+}
+
+.btn-launch-showcase.green-accent {
+  background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-blue) 100%);
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.4);
+}
+
+.btn-launch-showcase.orange-accent {
+  background: linear-gradient(135deg, #ff5e00 0%, #ff003c 100%);
+  box-shadow: 0 0 25px rgba(255, 94, 0, 0.4);
+  color: #ffffff;
+}
+
+.btn-launch-showcase.pokemon-drafter-accent {
+  background: linear-gradient(135deg, #da5a59 0%, #316299 100%);
+  box-shadow: 0 0 25px rgba(218, 90, 89, 0.45);
+  color: #ffffff;
+}
+
+.btn-launch-showcase:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.15);
+}
+
+.btn-launch-showcase:active {
+  transform: translateY(1px);
+}
+
+/* Roster Quick Selector Column */
+.sector-navigation-list {
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.list-header-cyber {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.list-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+}
+
+.list-count {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--neon-blue);
+}
+
+.sector-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 5px;
+}
+
+.sector-roster::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sector-roster::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sector-roster::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.sector-roster::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 243, 255, 0.15);
+}
+
+.sector-roster-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.sector-roster-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.sector-roster-item.active::before {
+  background-color: var(--neon-blue);
+}
+
+.sector-roster-item.pink-accent.active::before {
+  background-color: var(--neon-pink);
+}
+
+.sector-roster-item.purple-accent.active::before {
+  background-color: var(--neon-purple);
+}
+
+.sector-roster-item.green-accent.active::before {
+  background-color: var(--neon-green);
+}
+
+.sector-roster-item.orange-accent.active::before {
+  background-color: #ff5e00;
+}
+
+.sector-roster-item.pokemon-drafter-accent.active::before {
+  background-color: #da5a59;
+}
+
+.sector-roster-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(4px);
+}
+
+.sector-roster-item.active {
+  background: rgba(0, 243, 255, 0.05);
+  border-color: rgba(0, 243, 255, 0.25);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.05);
+}
+
+.sector-roster-item.pink-accent.active {
+  background: rgba(255, 0, 123, 0.04);
+  border-color: rgba(255, 0, 123, 0.25);
+  box-shadow: 0 0 15px rgba(255, 0, 123, 0.05);
+}
+
+.sector-roster-item.purple-accent.active {
+  background: rgba(157, 0, 255, 0.04);
+  border-color: rgba(157, 0, 255, 0.25);
+  box-shadow: 0 0 15px rgba(157, 0, 255, 0.05);
+}
+
+.sector-roster-item.green-accent.active {
+  background: rgba(57, 255, 20, 0.04);
+  border-color: rgba(57, 255, 20, 0.25);
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.05);
+}
+
+.sector-roster-item.orange-accent.active {
+  background: rgba(255, 94, 0, 0.04);
+  border-color: rgba(255, 94, 0, 0.25);
+  box-shadow: 0 0 15px rgba(255, 94, 0, 0.05);
+}
+
+.sector-roster-item.pokemon-drafter-accent.active {
+  background: rgba(218, 90, 89, 0.04);
+  border-color: rgba(218, 90, 89, 0.25);
+  box-shadow: 0 0 15px rgba(218, 90, 89, 0.05);
+}
+
+.roster-item-thumbnail {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.roster-item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  text-align: left;
+}
+
+.roster-item-code {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.sector-roster-item.active .roster-item-code {
+  color: var(--neon-blue);
+}
+
+.sector-roster-item.pink-accent.active .roster-item-code {
+  color: var(--neon-pink);
+}
+
+.sector-roster-item.purple-accent.active .roster-item-code {
+  color: var(--neon-purple);
+}
+
+.sector-roster-item.green-accent.active .roster-item-code {
+  color: var(--neon-green);
+}
+
+.sector-roster-item.orange-accent.active .roster-item-code {
+  color: #ff5e00;
+}
+
+.sector-roster-item.pokemon-drafter-accent.active .roster-item-code {
+  color: #da5a59;
+}
+
+.roster-item-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 2px 0 0 0;
+  letter-spacing: 0.5px;
+}
+
+.sector-roster-item.active .roster-item-name {
+  color: #ffffff;
+}
+
+.roster-status-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.roster-status-indicator.live, .roster-status-indicator.active, .roster-status-indicator.online {
+  background-color: var(--neon-green);
+  box-shadow: 0 0 5px var(--neon-green);
+}
+
+.roster-status-indicator.voting-live {
+  background-color: var(--neon-blue);
+  box-shadow: 0 0 5px var(--neon-blue);
+}
+
+.roster-status-indicator.registering {
+  background-color: var(--neon-pink);
+  box-shadow: 0 0 5px var(--neon-pink);
+}
+
+
+
+
+/* Friends Sidebar Panel Layout */
+.friends-list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 10px 15px;
+  box-sizing: border-box;
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.friend-card:hover {
+  background: rgba(0, 243, 255, 0.03);
+  border-color: rgba(0, 243, 255, 0.2);
+}
+
+.friend-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.friend-status-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid #06060c;
+}
+
+.friend-status-dot.online {
+  background-color: var(--neon-green);
+  box-shadow: 0 0 5px var(--neon-green);
+}
+
+.friend-status-dot.ingame {
+  background-color: var(--neon-pink);
+  box-shadow: 0 0 5px var(--neon-pink);
+}
+
+.friend-status-dot.offline {
+  background-color: #4a5568;
+}
+
+.friend-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  text-align: left;
+}
+
+.friend-name {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.friend-status-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.8rem;
+  color: #a0aec0;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-invite-friend {
+  background: transparent;
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  border-radius: 4px;
+  color: var(--neon-blue);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  flex-shrink: 0;
+}
+
+.friend-card:hover .btn-invite-friend {
+  opacity: 1;
+}
+
+.btn-invite-friend:hover {
+  background: var(--neon-blue);
+  color: #06060c;
+  box-shadow: 0 0 6px var(--neon-blue);
+}
